@@ -41,7 +41,7 @@ public class InterfazList {
 
             //imprimirLista(lista);
 
-            lista.removeFirst();
+            //lista.removeFirst();
 
             imprimirLista(lista);
 
