@@ -73,7 +73,7 @@ class ListaEnlazada {
     }
 }
 
-public class Entregable_04 {
+public class ListaEnlazada {
     public static void main(String[] args) {
 
         ListaEnlazada lista = new ListaEnlazada();
