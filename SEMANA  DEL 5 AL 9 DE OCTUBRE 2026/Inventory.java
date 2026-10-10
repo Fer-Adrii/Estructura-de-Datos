@@ -4,77 +4,82 @@ public class Inventory {
     // Lista donde se guardan los productos
     private LinkedList<Product> products;
     
-    //Constructor: crea la lista vacía
+    // Constructor: crea la lista vacía
     public Inventory () {
         products = new LinkedList<>();
     }
 
-    //AGREGAR UN PRODUCTO NUEVO
-    public void newProduct (int ID, String name, int existence, double price) {
-        // Crea un nuevo objeto Product
-        Product newProduct = new Product (ID, name, existence, price);
-        
-        // Agrega el producto a la lista
+    // Método auxiliar para buscar un producto por ID y retornar el objeto (o null si no existe)
+    private Product findProduct(int ID) {
+        int index = products.indexOf(new Product(ID));
+        if (index != -1) {
+            return products.get(index);
+        }
+        return null;
+    }
+
+    // AGREGAR UN PRODUCTO NUEVO (con categoría)
+    public void newProduct (int ID, String name, int existence, double price, String category) {
+        Product newProduct = new Product(ID, name, existence, price, category);
         boolean success = products.add(newProduct);
         
-        // Informa si se agregó correctamente
         if (success) {
-            System.out.println(
-                "El producto " + name + 
-                " se añadió satisfactoriamente"
-            );
+            System.out.println("El producto " + name + " se añadió satisfactoriamente");
         } else {
             System.out.println("Ocurrio un problema al agregar el producto");
         }
     }
 
-    //AUMENTAR LA EXISTENCIA DE UN PRODUCTO
+    // AUMENTAR LA EXISTENCIA DE UN PRODUCTO
     public void addProduct (int ID) {
-        //Busca la posición del producto por su ID
-        int productIndex = products.indexOf (new Product (ID) ) ;
-        // Obtiene el producto encontrado
-        Product product = products.get (productIndex) ;
-        // Consulta la existencia actual
-        int existenceTemp = product.getExistence () ;
-        // Aumenta la existencia en una unidad
-        int newExistence = existenceTemp + 1;
-        // Guarda la nueva existencia
-        product.setExistence (newExistence) ;
-        System.out.println ("\nSe agrego una unidad de "+ product.getName ());
+        Product product = findProduct(ID);
+        if (product != null) {
+            int existenceTemp = product.getExistence();
+            int newExistence = existenceTemp + 1;
+            product.setExistence(newExistence);
+            System.out.println("\nSe agrego una unidad de " + product.getName());
+        } else {
+            System.out.println("El producto no existe");
+        }
     }
     
-    //  MOSTRAR TODOS LOS PRODUCTOS
+    // CONSULTAR UN PRODUCTO POR ID
+    public void searchProduct (int ID) {
+        Product product = findProduct(ID);
+        if (product != null) {
+            System.out.println("\nPRODUCTO ENCONTRADO:");
+            System.out.println(product);
+        } else {
+            System.out.println("El producto no existe");
+        }
+    }
+
+    // MOSTRAR TODOS LOS PRODUCTOS
     public void printProduct() {
-        System.out.println ("PRODUCTOS EN EL ALMACEN") ;
-        // Recorre e imprime la lista
-        products.forEach (System.out::println) ;
+        System.out.println("\nPRODUCTOS EN EL ALMACEN");
+        products.forEach(System.out::println);
         System.out.println();
     }
 
-    //Actualizar precio
+    // ACTUALIZAR PRECIO
     public void updateProduct(int ID, double price){
-        //Busca la posicion usando el ID
-        int productIndex = products.indexOf(new Product(ID));
-        //Obtiene el producto encontrado
-        Product product = products.get(productIndex);
-        //Cambia el precio
-        product.setPrice(price);
-        System.out.println("\nPrecio actualizado correctamente");
+        Product product = findProduct(ID);
+        if (product != null) {
+            product.setPrice(price);
+            System.out.println("\nPrecio actualizado correctamente");
+        } else {
+            System.out.println("El producto no existe");
+        }
     }
 
-    //Eliminar un producto
+    // ELIMINAR UN PRODUCTO
     public void deleteProduct(int ID){
-        //Buscala posicion usando el ID
-        int productIndex = products.indexOf(new Product(ID));
-        //Elimina y guarda el producto eliminado
-        Product deleteProduct = products.remove(productIndex);
-
-        //Verifica si se elimino
-        if (deleteProduct != null){
-            System.out.println("El producto "+ deleteProduct+ " se elimino");
-        }
-        else{
-            System.out.println("El producto NO se elimino");
+        Product product = findProduct(ID);
+        if (product != null) {
+            products.remove(product);
+            System.out.println("El producto " + product + " se elimino");
+        } else {
+            System.out.println("El producto no existe");
         }
     }
 }
