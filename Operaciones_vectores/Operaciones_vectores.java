@@ -41,6 +41,7 @@ public class Operaciones_vectores {
         estudiantes.remove(1);
         estudiantes.remove("Mon");
 
+        //Mostrar la cantidad de elementos del vector (size) y la capacidad de elementos de dicho vector(capacity)
         System.out.println(estudiantes);
         System.out.println("Tamaño : "+ estudiantes.size());
         System.out.println("Capacidad : "+ estudiantes.capacity());
