@@ -82,15 +82,15 @@ Es mejor usar offer(). Ambos métodos agregan elementos a la cola, pero add() la
 Salida de la consola:
 
 ```
-Cola completa: [Adrian, Bogota, Informatica, Java]
+Cola completa: [Adrian, Bogota, Tecnologia en Informatica, Python]
 
 Cabeza (prediccion: Adrian): Adrian
 
 Vaciando la cola por orden de prioridad (alfabetico):
 Se saco: Adrian
 Se saco: Bogota
-Se saco: Informatica
-Se saco: Java
+Se saco: Tecnologia en Informatica
+Se saco: Python
 ```
 ¿Acertaste tu predicción?
 
